@@ -10,6 +10,10 @@ const PORT = process.env.PORT || 9000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 // Any route that goes to slash,
 // Have the router object inside of routes
 // Handle the routing for us
