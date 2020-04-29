@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import Counter from './counter';
-import TodoForm from './todoForm';
+import Counter from '../../containers/counter';
+import TodoForm from '../../containers/todoForm';
 // Functional Components
 
 // Regular components that contain no state. All they do is render HTML aka Dumb Components.
@@ -9,15 +9,11 @@ import TodoForm from './todoForm';
   // api request, onClick handlers, and a bunch of other logic
   // We call these "containers"
 
-class App extends Component {
-  render() {
-    return (
-      <>
-        <Counter/>
-        <TodoForm/>
-      </>  
-    );
-  }
-}
+const App = () => (
+  <>
+    <Counter/>
+    <TodoForm/>
+  </>
+)
 
 export default App;

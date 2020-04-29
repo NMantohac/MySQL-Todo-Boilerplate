@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import RenderTodoList from '../../components/renderTodoList'
 
 class TodoForm extends Component {
   state = {
@@ -22,19 +23,21 @@ class TodoForm extends Component {
     }
   }
 
-  renderTodos = () => {
-    if (this.state.todos.length === 0) {
-      return <h1>No todos yet</h1>
-    } else {
-      return (
-        <ul>
-          {
-            this.state.todos.map(todo => {
-              return <li key={todo.id} style={{ color: todo.completed ? 'blue' : 'red'}}>{todo.text}</li>
-            })
-          }
-        </ul>
-      );
+  handleDeleteTodo = async id => {
+    try {
+      const { data } = await axios.delete(`/api/todos/${id}`);
+      this.setState({ todos: data });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  handleUpdateTodo = async id => {
+    try {
+      const { data } = await axios.patch(`/api/todos/${id}`);
+      this.setState({ todos: data });
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -50,7 +53,11 @@ class TodoForm extends Component {
   render() {
     return (
       <div>
-        { this.renderTodos() }
+        <RenderTodoList 
+          items={this.state.todos}
+          handleDelete={this.handleDeleteTodo}  
+          handleUpdate={this.handleUpdateTodo}
+        />
         <form>
           <input
             name='todoInput'
@@ -63,4 +70,5 @@ class TodoForm extends Component {
     );
   }
 }
+
 export default TodoForm;

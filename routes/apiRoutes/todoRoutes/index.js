@@ -7,15 +7,19 @@ router.route('/')
   .get(todosController.getAllTodos)
   .post(todosController.addTodo);
 
+// /api/todos/completed
 router.route('/completed')
   .get(todosController.getAllCompleted);
 
+// /api/todos/incomplete
 router.route('/incomplete')
   .get(todosController.getAllIncomplete);
 
+// /api/todos/id
 router.route('/:id')
   .get(todosController.getTodoById)
-  .patch(todosController.patchTodo)
+  // .patch(todosController.patchTodo)
+  .patch(todosController.patchTodoCompleted)
   .put(todosController.putTodo)
   .delete(todosController.deleteTodoById);
 
