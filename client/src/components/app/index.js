@@ -1,7 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 import Counter from '../../containers/counter';
 import TodoForm from '../../containers/todoForm';
+import Navbar from '../navbar'
+import TodoCard from '../../containers/todoCard'
 // Functional Components
 
 // Regular components that contain no state. All they do is render HTML aka Dumb Components.
@@ -10,10 +13,13 @@ import TodoForm from '../../containers/todoForm';
   // We call these "containers"
 
 const App = () => (
-  <>
-    <Counter/>
-    <TodoForm/>
-  </>
+  <Router>
+    <Navbar/>
+    <Route exact path='/' component={TodoForm}/>
+    <Route exact path='/counter' component={Counter}/>
+    <Route exact path='/todos' component={TodoForm}/>
+    <Route exact path='/todos/:todoId' component={TodoCard}/>
+  </Router>
 )
 
 export default App;

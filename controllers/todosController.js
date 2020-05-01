@@ -114,4 +114,16 @@ module.exports = {
       return res.status(403).json({ err });
     }
   },
+
+  patchTodoTextById: async (req, res) => {
+    const { id } = req.params;
+    const { text } = req.body;
+    try {
+      await connection.query(todoQueries.updateTodoTextById, [text, id]);
+      const [todos] = await connection.query(todoQueries.findTodoById, id);
+      return res.json(todos[0]);
+    } catch (err) {
+      return res.status(403).json({ err });
+    }
+  },
 };

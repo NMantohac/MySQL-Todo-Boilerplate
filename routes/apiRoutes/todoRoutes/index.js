@@ -15,6 +15,9 @@ router.route('/completed')
 router.route('/incomplete')
   .get(todosController.getAllIncomplete);
 
+router.route('/:id/updatetext')
+  .patch(todosController.patchTodoTextById);
+
 // /api/todos/id
 router.route('/:id')
   .get(todosController.getTodoById)

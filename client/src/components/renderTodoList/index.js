@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const renderTodoList = props => {
   const renderTodoListItems = () => {
@@ -8,7 +9,7 @@ const renderTodoList = props => {
       return props.items.map(todo => {
         return (
           <div key={todo.id}>
-            <li style={{ color: todo.completed ? 'blue' : 'red'}}>{todo.text}</li>
+            <Link to={`/todos/${todo.id}`}><li style={{ color: todo.completed ? 'blue' : 'red'}}>{todo.text}</li></Link>
             <button onClick={() => props.handleDelete(todo.id)}>Delete</button>
             <button onClick={() => props.handleUpdate(todo.id)}>Update</button>
           </div>
